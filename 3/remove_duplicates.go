@@ -17,27 +17,51 @@ import "fmt"
 
 func RemoveDuplicates(slice []int) (int, []int) {
 
-    if len(slice) == 0 {
-        return 0, slice
-    }
-    
-    newIndex := 1
-    for i := 1; i < len(slice); i++ {
-        if slice[i] != slice[i-1] {
-            slice[newIndex] = slice[i]
-            newIndex++
-        }
-    }
-    
-    return newIndex, slice[:newIndex]
+	if len(slice) == 0 {
+		return 0, slice
+	}
+	
+	newIndex := 1
+	for i := 1; i < len(slice); i++ {
+		if slice[i] != slice[i-1] {
+			slice[newIndex] = slice[i]
+			newIndex++
+		}
+	}
+	
+	return newIndex, slice[:newIndex]
 }
 
 func main() {
 	length, slice := RemoveDuplicates([]int{1,1,1,1,1,1,1})
-    fmt.Println(length, slice)
-    fmt.Println("Expecting 1 and [1] above")
+	fmt.Println(length, slice)
+	fmt.Println("Expecting 1 and [1] above")
 
-    length2, slice2 := RemoveDuplicates([]int{1,2,2,3,5,5,5})
-    fmt.Println(length2, slice2)
-    fmt.Println("Expecting 4 and [1 2 3 5] above")
+	length2, slice2 := RemoveDuplicates([]int{1,2,2,3,5,5,5})
+	fmt.Println(length2, slice2)
+	fmt.Println("Expecting 4 and [1 2 3 5] above")
 }
+
+// SOLUTION BELOW PASSES THE TESTS BUT USES A COPY OF THE SLICE INSTEAD OF THE ORIGINAL SLICE.
+
+// func numInSlice(slice []int, num int) bool {
+//     for _, v := range slice {
+//         if v == num {
+//             return true
+//         }
+//     }
+//     return false
+// }
+
+// func RemoveDuplicates(slice []int) (int, []int) {
+//     k := 0
+//     testingSlice := []int{}
+
+//     for _, v := range slice {
+//         if !numInSlice(testingSlice, v) {
+//             testingSlice = append(testingSlice, v)
+//             k ++
+//         }
+//     }
+//     return k, testingSlice
+// }
