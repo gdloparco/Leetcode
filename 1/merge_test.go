@@ -16,7 +16,7 @@ func TestMergeSuccess(t *testing.T) {
 
 	t.Run("merge two slices [1,2,3,0,0,0] and [2,5,6]" , func(t *testing.T) {
 		slice1 := []int{1,2,3,0,0,0}
-		m := 6
+		m := 3
 		slice2 := []int{2,5,6}
 		n := 3
 
@@ -24,14 +24,24 @@ func TestMergeSuccess(t *testing.T) {
 		expected := []int{1,2,2,3,5,6}
 		checkSlice(t, got, expected)
 	})
+	t.Run("merge two slices [1,2,3] and []" , func(t *testing.T) {
+		slice1 := []int{1,2,3}
+		m := 3
+		slice2 := []int{}
+		n := 0
+
+		got := Merge(slice1, m, slice2, n)
+		expected := []int{1,2,3}
+		checkSlice(t, got, expected)
+	})
 }
 
 func ExampleMerge() {
 	slice1 := []int{1,2,3,0,0,0}
-	m := 6
+	m := 3
 	slice2 := []int{2,5,6}
 	n := 3
 	result := Merge(slice1, m, slice2, n)
 	fmt.Println(result)
-	// Output: [1,2,2,3,5,6]
+	// Output: [1 2 2 3 5 6]
 }
