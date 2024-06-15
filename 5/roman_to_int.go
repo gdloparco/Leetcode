@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // Symbol       Value
 // I             1
 // V             5
@@ -23,9 +21,13 @@ func romanToInt(romanNum string) int {
 	convTable := map[rune]int{'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
 	result := 0
 
-	for _, v := range romanNum {
+	for i, v := range romanNum {
 		value := convTable[v]
-		
+		if i < len(romanNum)-1 && value < convTable[rune(romanNum[i+1])] {
+			result -= value
+		} else {
+			result += value
+		}
 	}
 	return result
 }
@@ -44,29 +46,29 @@ func romanToInt(romanNum string) int {
 // 	for i, v := range integers {
 // 		if i == 0 {
 // 			if v == integers[i+1] || v > integers[i+1]{
-// 				result = result + v
+// 				result += v
 // 				fmt.Println(result)
 // 			} else if v < integers[i+1]{
-// 				result = result + (integers[i+1] - v)
+// 				result += (integers[i+1] - v)
 // 				fmt.Println(result)
 // 			} 
 // 		} else if i+1 < len(integers) {
 // 			if v > integers[i-1] {
 // 				continue
 // 			} else if v == integers[i-1] {
-// 				result = result + v
+// 				result += v
 // 			} else if v == integers[i+1]{
-// 				result = result + v
+// 				result += v
 // 				fmt.Println(result)
 // 			} else if v < integers[i+1]{
-// 				result = result + (integers[i+1] - v)
+// 				result += (integers[i+1] - v)
 // 				fmt.Println(result)
 // 			} 
 // 		} else {
 // 			if v > integers[i-1] {
 // 				continue
 // 			} else {
-// 				result = result + v
+// 				result += v
 // 				fmt.Println(result)
 // 			} 
 // 		}
